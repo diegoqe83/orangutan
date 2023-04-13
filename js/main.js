@@ -1,4 +1,38 @@
-//Levanto la lista de productos de Listadodeproductos.json
+//Declaro la funcion mostrarProductos, levanto la lista de productos de Listadodeproductos.json y muestro los productos en DOM
+
+function mostrarProductos(Listadeproductos) {
+  //Muestro toda mi lista de productos en DOM
+  Listadeproductos.forEach((producto) => {
+    contenedor_productos.innerHTML += `
+  <div class="card" style="width: 18rem">
+    <img src="${producto.img}" class="card-img-top" alt="${producto.alt}" />
+    <div class="card-body">
+      <h5 class="card-title">${producto.nombre}</h5>
+      <p class="card-text">
+        $${producto.precio}
+      </p>
+    <a href="#" class="btn btn-primary" id="producto${producto.id}" >Agregar al carrito</a>
+    </div>
+  </div>`;
+  });
+  //Asigno a cada botón un evento de escuchar y lo voy agregando al carrito
+  Listadeproductos.forEach((producto) => {
+    const producto_a_agregar = document.getElementById(
+      `producto${producto.id}`
+    );
+    producto_a_agregar.addEventListener("click", () => {
+      controladorCarrito.anadir(producto);
+      controladorCarrito.levantar();
+      controladorCarrito.mostrarEnDOM(contenedor_carrito);
+      controladorCarrito.mostrarPreciosEnDOM(precio, precio_con_iva);
+      Toastify({
+        text: "Su producto ha sido añadido",
+        gravity: "bottom",
+        duration: 1000,
+      }).showToast();
+    });
+  });
+}
 
 fetch("./js/listadodeproductos.json")
   .then((res) => res.json())
@@ -91,40 +125,6 @@ if (haycarrito) {
 
 controladorCarrito.mostrarEnDOM(contenedor_carrito);
 
-function mostrarProductos(Listadeproductos) {
-  //Muestro toda mi lista de productos en DOM
-  Listadeproductos.forEach((producto) => {
-    contenedor_productos.innerHTML += `
-  <div class="card" style="width: 18rem">
-    <img src="${producto.img}" class="card-img-top" alt="${producto.alt}" />
-    <div class="card-body">
-      <h5 class="card-title">${producto.nombre}</h5>
-      <p class="card-text">
-        $${producto.precio}
-      </p>
-    <a href="#" class="btn btn-primary" id="producto${producto.id}" >Agregar al carrito</a>
-    </div>
-  </div>`;
-  });
-
-  //Asigno a cada botón un evento de escuchar y lo voy agregando al carrito
-  Listadeproductos.forEach((producto) => {
-    const producto_a_agregar = document.getElementById(
-      `producto${producto.id}`
-    );
-    producto_a_agregar.addEventListener("click", () => {
-      controladorCarrito.anadir(producto);
-      controladorCarrito.levantar();
-      controladorCarrito.mostrarEnDOM(contenedor_carrito);
-      controladorCarrito.mostrarPreciosEnDOM(precio, precio_con_iva);
-      Toastify({
-        text: "Su producto ha sido añadido",
-        gravity: "bottom",
-        duration: 500,
-      }).showToast();
-    });
-  });
-}
 //Finalizar compra
 
 const finalizar_compra = document.getElementById("finalizar_compra");
