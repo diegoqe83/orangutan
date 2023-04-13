@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "nombre": "Java Orangutan",
+    "precio": 15000,
+    "descripción": "poncho cambiador color violeta",
+    "Cantidad": 1,
+    "img": "./Assets/img/java.png",
+    "alt": "poncho cambiador color violeta"
+  },
+  {
+    "id": 2,
+    "nombre": "Bali Orangutan",
+    "precio": 15000,
+    "descripción": "poncho cambiador color azul",
+    "Cantidad": 1,
+    "img": "./Assets/img/bali.png",
+    "alt": "poncho cambiador color azul"
+  },
+  {
+    "id": 3,
+    "nombre": "Borneo Orangutan",
+    "precio": 15000,
+    "descripción": "poncho cambiador color naranja",
+    "Cantidad": 1,
+    "img": "./Assets/img/borneo.png",
+    "alt": "poncho cambiador color naranja"
+  },
+  {
+    "id": 4,
+    "nombre": "Sumatra Orangutan",
+    "precio": 15000,
+    "descripción": "poncho cambiador color verde",
+    "Cantidad": 1,
+    "img": "./Assets/img/sumatra.png",
+    "alt": "poncho cambiador color verde"
+  },
+  {
+    "id": 5,
+    "nombre": "Cambiador rojo",
+    "precio": 5000,
+    "descripción": "Cambiador anti-arena color rojo",
+    "Cantidad": 1,
+    "img": "./Assets/img/roja.jpg",
+    "alt": "Cambiador anti-arena color rojo"
+  },
+  {
+    "id": 6,
+    "nombre": "Cambiador verde",
+    "precio": 5000,
+    "descripción": "Cambiador anti-arena color verde",
+    "Cantidad": 1,
+    "img": "./Assets/img/verde.jpg",
+    "alt": "Cambiador anti-arena color verde"
+  },
+  {
+    "id": 7,
+    "nombre": "Cambiador violeta",
+    "precio": 5000,
+    "descripción": "Cambiador anti-arena color violeta",
+    "Cantidad": 1,
+    "img": "./Assets/img/violeta.jpg",
+    "alt": "Cambiador anti-arena color violeta"
+  }
+]
