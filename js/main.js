@@ -1,87 +1,8 @@
 //Levanto la lista de productos de Listadodeproductos.json
 
-const Listadeproductos = obtenerJSON();
-
-async function obtenerJSON() {
-  let variable;
-  try {
-    const response = await fetch("./listadodeproductos.json");
-    variable = await response.json();
-  } catch (err) {
-    console.log(err); //para leer si hay un error y que es
-  }
-  console.log(variable);
-  return variable;
-}
-
-console.log(Listadeproductos);
-
-//Creo la lista de productos
-/*const Listadeproductos = [
-  {
-    id: 1,
-    nombre: "Java Orangutan",
-    precio: 15000,
-    descripción: "poncho cambiador color violeta",
-    Cantidad: 1,
-    img: "./Assets/img/java.png",
-    alt: "poncho cambiador color violeta",
-  },
-  {
-    id: 2,
-    nombre: "Bali Orangutan",
-    precio: 15000,
-    descripción: "poncho cambiador color azul",
-    Cantidad: 1,
-    img: "./Assets/img/bali.png",
-    alt: "poncho cambiador color azul",
-  },
-  {
-    id: 3,
-    nombre: "Borneo Orangutan",
-    precio: 15000,
-    descripción: "poncho cambiador color naranja",
-    Cantidad: 1,
-    img: "./Assets/img/borneo.png",
-    alt: "poncho cambiador color naranja",
-  },
-  {
-    id: 4,
-    nombre: "Sumatra Orangutan",
-    precio: 15000,
-    descripción: "poncho cambiador color verde",
-    Cantidad: 1,
-    img: "./Assets/img/sumatra.png",
-    alt: "poncho cambiador color verde",
-  },
-  {
-    id: 5,
-    nombre: "Cambiador rojo",
-    precio: 5000,
-    descripción: "Cambiador anti-arena color rojo",
-    Cantidad: 1,
-    img: "./Assets/img/roja.jpg",
-    alt: "Cambiador anti-arena color rojo",
-  },
-  {
-    id: 6,
-    nombre: "Cambiador verde",
-    precio: 5000,
-    descripción: "Cambiador anti-arena color verde",
-    Cantidad: 1,
-    img: "./Assets/img/verde.jpg",
-    alt: "Cambiador anti-arena color verde",
-  },
-  {
-    id: 7,
-    nombre: "Cambiador violeta",
-    precio: 5000,
-    descripción: "Cambiador anti-arena color violeta",
-    Cantidad: 1,
-    img: "./Assets/img/violeta.jpg",
-    alt: "Cambiador anti-arena color violeta",
-  },
-];*/
+fetch("./js/listadodeproductos.json")
+  .then((res) => res.json())
+  .then((data) => mostrarProductos(data));
 
 //Creo controlador de carrito con sus métodos
 class CarritoController {
@@ -170,9 +91,10 @@ if (haycarrito) {
 
 controladorCarrito.mostrarEnDOM(contenedor_carrito);
 
-//Muestro toda mi lista de productos en DOM
-Listadeproductos.forEach((producto) => {
-  contenedor_productos.innerHTML += `
+function mostrarProductos(Listadeproductos) {
+  //Muestro toda mi lista de productos en DOM
+  Listadeproductos.forEach((producto) => {
+    contenedor_productos.innerHTML += `
   <div class="card" style="width: 18rem">
     <img src="${producto.img}" class="card-img-top" alt="${producto.alt}" />
     <div class="card-body">
@@ -183,24 +105,26 @@ Listadeproductos.forEach((producto) => {
     <a href="#" class="btn btn-primary" id="producto${producto.id}" >Agregar al carrito</a>
     </div>
   </div>`;
-});
-
-//Asigno a cada botón un evento de escuchar y lo voy agregando al carrito
-Listadeproductos.forEach((producto) => {
-  const producto_a_agregar = document.getElementById(`producto${producto.id}`);
-  producto_a_agregar.addEventListener("click", () => {
-    controladorCarrito.anadir(producto);
-    controladorCarrito.levantar();
-    controladorCarrito.mostrarEnDOM(contenedor_carrito);
-    controladorCarrito.mostrarPreciosEnDOM(precio, precio_con_iva);
-    Toastify({
-      text: "Su producto ha sido añadido",
-      gravity: "bottom",
-      duration: 500,
-    }).showToast();
   });
-});
 
+  //Asigno a cada botón un evento de escuchar y lo voy agregando al carrito
+  Listadeproductos.forEach((producto) => {
+    const producto_a_agregar = document.getElementById(
+      `producto${producto.id}`
+    );
+    producto_a_agregar.addEventListener("click", () => {
+      controladorCarrito.anadir(producto);
+      controladorCarrito.levantar();
+      controladorCarrito.mostrarEnDOM(contenedor_carrito);
+      controladorCarrito.mostrarPreciosEnDOM(precio, precio_con_iva);
+      Toastify({
+        text: "Su producto ha sido añadido",
+        gravity: "bottom",
+        duration: 500,
+      }).showToast();
+    });
+  });
+}
 //Finalizar compra
 
 const finalizar_compra = document.getElementById("finalizar_compra");
